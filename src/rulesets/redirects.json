@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "popads.net",
+      "resourceTypes": ["script", "sub_frame"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "onclickads.net",
+      "resourceTypes": ["script"]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "adf.ly",
+      "resourceTypes": ["sub_frame"]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "linkvertise.com",
+      "resourceTypes": ["sub_frame"]
+    }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "redirector.googlevideo.com",
+      "resourceTypes": ["sub_frame"]
+    }
+  },
+  {
+    "id": 6,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "trafficjunky.net",
+      "resourceTypes": ["script"]
+    }
+  }
+]
