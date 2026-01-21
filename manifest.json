@@ -7,6 +7,10 @@
     "default_popup": "src/popup.html",
     "default_icon": "icons/color48.png"
   },
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
   "icons": {
     "16": "icons/color16.png",
     "32": "icons/color32.png",
@@ -17,7 +21,8 @@
     "rule_resources": [
       { "id": "ads", "enabled": true, "path": "src/rulesets/ads.json" },
       { "id": "trackers", "enabled": true, "path": "src/rulesets/trackers.json" },
-      { "id": "annoyances", "enabled": true, "path": "src/rulesets/annoyances.json" }
+      { "id": "annoyances", "enabled": true, "path": "src/rulesets/annoyances.json" },
+      { "id": "addon", "enabled": true, "path": "src/rulesets/addon.json" }
     ]
   },
   "permissions": [
