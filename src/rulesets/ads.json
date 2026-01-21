@@ -2,64 +2,31 @@
   {
     "id": 1,
     "priority": 1,
-    "action": { "type": "block" },
+    "action": {
+      "type": "block"
+    },
     "condition": {
-      "urlFilter": "doubleclick.net",
-      "resourceTypes": ["script", "image", "sub_frame"]
+      "urlFilter": "doubleclick.net"
     }
   },
   {
     "id": 2,
     "priority": 1,
-    "action": { "type": "block" },
+    "action": {
+      "type": "block"
+    },
     "condition": {
-      "urlFilter": "googlesyndication.com",
-      "resourceTypes": ["script", "image", "sub_frame"]
+      "urlFilter": "ads.twitter.com"
     }
   },
   {
     "id": 3,
     "priority": 1,
-    "action": { "type": "block" },
+    "action": {
+      "type": "block"
+    },
     "condition": {
-      "urlFilter": "adservice.google.com",
-      "resourceTypes": ["script", "image"]
-    }
-  },
-  {
-    "id": 4,
-    "priority": 1,
-    "action": { "type": "block" },
-    "condition": {
-      "urlFilter": "taboola.com",
-      "resourceTypes": ["script", "sub_frame"]
-    }
-  },
-  {
-    "id": 5,
-    "priority": 1,
-    "action": { "type": "block" },
-    "condition": {
-      "urlFilter": "outbrain.com",
-      "resourceTypes": ["script", "sub_frame"]
-    }
-  },
-  {
-    "id": 6,
-    "priority": 1,
-    "action": { "type": "block" },
-    "condition": {
-      "urlFilter": "ads.yahoo.com",
-      "resourceTypes": ["script"]
-    }
-  },
-  {
-    "id": 7,
-    "priority": 1,
-    "action": { "type": "block" },
-    "condition": {
-      "urlFilter": "adsystem.com",
-      "resourceTypes": ["script"]
+      "urlFilter": "googlesyndication.com"
     }
   }
 ]

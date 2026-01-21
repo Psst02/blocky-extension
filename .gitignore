@@ -37,3 +37,6 @@ Thumbs.db
 # Chrome extension debug
 *.crx
 *.pem
+
+# abp2dnr tool
+tools/abp2dnr
