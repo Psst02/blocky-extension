@@ -1,9 +1,9 @@
 [Adblock Plus 2.0]
-! Version: 202601210951
+! Version: 202601211012
 ! Title: EasyList
-! Last modified: 21 Jan 2026 09:51 UTC
+! Last modified: 21 Jan 2026 10:12 UTC
 ! Expires: 4 days (update frequency)
-! Commit: ea26c044684ee0080541fb367724cf18a9a31507
+! Commit: 894ed2fafb3b33dcc4036b0f48833ebb492d79d6
 ! *** easylist:template_header.txt ***
 ! 
 ! Please report any unblocked adverts or problems
@@ -17007,6 +17007,7 @@ browsershots.org#@#.advert_area
 ||acgugjkxtebno.site^
 ||achamoasozom.net^
 ||achcdn.com^
+||acheerdewey.cyou^
 ||acheronascyrum.cfd^
 ||acheworry.com^
 ||achievablecpmrevenue.com^
@@ -24910,6 +24911,7 @@ browsershots.org#@#.advert_area
 ||cyiihoobjuxlx.space^
 ||cyksmcjfyyxxu.rocks^
 ||cyl9l3yfzj5kjpl92.cfd^
+||cylfakyhloppf.space^
 ||cylindrical-good.pro^
 ||cylindrical-wave.com^
 ||cylindricalintroduction.com^
@@ -50119,6 +50121,7 @@ browsershots.org#@#.advert_area
 ||rpyoasspbcjmr.site^
 ||rpyztjadsbonh.store^
 ||rqcuizmakyyma.online^
+||rqeddaaygpsdwk.com^
 ||rqejawwwooeek.top^
 ||rqerokcafoadv.space^
 ||rqgiwrjyicatp.site^
@@ -56864,6 +56867,7 @@ browsershots.org#@#.advert_area
 ||utmostsecond.com^
 ||utnbfoeokjxuz.website^
 ||utokapa.com^
+||utopiascuttoosmantel.cfd^
 ||utopiasiodines.click^
 ||utoumine.net^
 ||utppooxusnnzr.online^

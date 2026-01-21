@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "update-lists": "bash scripts/update-lists.sh"
+  },
   "dependencies": {
     "@eyeo/abp2dnr": "^1.3.3",
     "chrome-types": "^0.1.414"
