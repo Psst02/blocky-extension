@@ -17,7 +17,7 @@
     "rule_resources": [
       { "id": "ads", "enabled": true, "path": "src/rulesets/ads.json" },
       { "id": "trackers", "enabled": true, "path": "src/rulesets/trackers.json" },
-      { "id": "redirects", "enabled": true, "path": "src/rulesets/redirects.json" }
+      { "id": "annoyances", "enabled": true, "path": "src/rulesets/annoyances.json" }
     ]
   },
   "permissions": [
