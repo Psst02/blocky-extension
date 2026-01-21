@@ -1,10 +1,30 @@
 {
-  "name": "BLOCKY",
-  "description": "Blocky is a Chrome extension that blocks online ads, popups, and trackers.",
+  "name": "BLOCKY - Free Ad Blocker",
+  "description": "Blocky is a Chrome ad blocker extension that blocks online ads, popups, and trackers for free.",
   "version": "1.0.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "src/popup.html",
-    "default_icon": "blocky-bnw(500x500).png"
-  }
+    "default_icon": "icons/color48.png"
+  },
+  "icons": {
+    "16": "icons/color16.png",
+    "32": "icons/color32.png",
+    "48": "icons/color48.png",
+    "128": "icons/color128.png"
+  },
+  "declarative_net_request" : {
+    "rule_resources": [
+      { "id": "ads", "enabled": true, "path": "src/rulesets/ads.json" },
+      { "id": "trackers", "enabled": true, "path": "src/rulesets/trackers.json" },
+      { "id": "annoyances", "enabled": true, "path": "src/rulesets/annoyances.json" }
+    ]
+  },
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ]
 }
