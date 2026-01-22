@@ -1,15 +1,23 @@
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-.body-container {
-  width: 200px;
-  height: 200px;
-  padding: 0.5em;
+.popup-root {
+  width: 270px;
+  height: 270px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-header,
+header {
+  margin-bottom: 1em;
+}
+
+.brand-title,
 .stats-container {
   display: flex;
   align-items: center;
@@ -23,6 +31,7 @@ header,
   display: inline-block;
   width: 60px;
   height: 34px;
+  margin: 1em auto;
 }
 
 input[type="checkbox"] {
@@ -83,4 +92,83 @@ input[type="checkbox"]:checked + .slider:before {
 
 .icon-btn:hover {
   opacity: 0.5;
+}
+
+/* Footer Section */
+footer {
+  padding: 0.5em;
+  background-color: grey;
+}
+
+footer > button {
+  color: gainsboro;
+}
+
+/* Page Navigation Animation */
+.view-container {
+  flex: 1;
+  overflow-x: hidden;
+}
+
+.view-slider {
+  display: flex;
+  height: 100%;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.view {
+  width: 100%;
+  flex-shrink: 0;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+/* Input Container */
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+#url-input {
+  width: 160px;
+  padding: 0 1em;
+  border: none;
+  border-radius: 30px;
+  outline: 1px solid grey;
+  margin-right: 4px;
+}
+
+.ul-items {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid grey;
+}
+
+#remove-btn {
+  color: darkred;
+}
+
+.switch-s {
+  width: 40px;
+  height: 22px;
+  margin: 0;
+}
+
+.switch-s .slider:before {
+  width: 15px;
+  height: 15px;
+  left: 3px;
+  bottom: 3px;
+}
+
+.switch-s input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+#view-settings .ul-items {
+  padding: 8px 0;
 }

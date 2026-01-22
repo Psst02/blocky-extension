@@ -22,7 +22,7 @@
       { "id": "ads", "enabled": true, "path": "src/rulesets/ads.json" },
       { "id": "trackers", "enabled": true, "path": "src/rulesets/trackers.json" },
       { "id": "annoyances", "enabled": true, "path": "src/rulesets/annoyances.json" },
-      { "id": "addon", "enabled": true, "path": "src/rulesets/addon.json" }
+      { "id": "redirects", "enabled": true, "path": "src/rulesets/redirects.json" }
     ]
   },
   "permissions": [

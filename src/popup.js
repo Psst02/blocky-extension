@@ -15,6 +15,20 @@ chrome.storage.local.get(["blockingEnabled"]).then((result) => {
 
 function updateStatus(isEnabled) {
     statusText.innerHTML = isEnabled
-      ? 'Ad blocking is <strong>ON</strong>'
-      : 'Ad blocking is <strong>OFF</strong>';
+      ? 'Blocking is <strong>ON</strong>'
+      : 'Blocking is <strong>OFF</strong>';
 }
+
+const slider = document.querySelector(".view-slider");
+
+document.getElementById("home-btn").onclick = () => {
+  slider.style.transform = "translateX(-100%)";
+};
+
+document.getElementById("edit-btn").onclick = () => {
+  slider.style.transform = "translateX(0%)";
+};
+
+document.getElementById("settings-btn").onclick = () => {
+  slider.style.transform = "translateX(-200%)";
+};

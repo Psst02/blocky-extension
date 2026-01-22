@@ -11,7 +11,7 @@ chrome.storage.onChanged.addListener((changes) => {
 
 function setRulesetState(isEnabled) {
     chrome.declarativeNetRequest.updateEnabledRulesets({
-        enableRulesetIds: isEnabled ? ["ads", "trackers", "annoyances"] : [],
-        disableRulesetIds: isEnabled ? [] : ["ads", "trackers", "annoyances"]
+        enableRulesetIds: isEnabled ? ["ads", "trackers", "annoyances", "redirects"] : [],
+        disableRulesetIds: isEnabled ? [] : ["ads", "trackers", "annoyances", "redirects"]
     });
 }
