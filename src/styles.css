@@ -172,3 +172,14 @@ footer > button {
 #view-settings .ul-items {
   padding: 8px 0;
 }
+
+#view-settings .ul-items div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#view-settings .ul-items div span {
+  color: darkblue;
+  cursor: pointer;
+}

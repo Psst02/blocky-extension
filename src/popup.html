@@ -116,7 +116,12 @@
             </header>
 
             <label class="switch">
-              <input type="checkbox" aria-labelledby="status" checked>
+              <input
+                type="checkbox"
+                data-key="master"
+                aria-labelledby="status"
+                checked
+              >
               <span class="slider"></span>
             </label>
             <p id="status"></p>
@@ -139,37 +144,91 @@
             <p>Preferences here</p>
             <ul>
               <li class="ul-items">
-                <p>Ads</p>
+                <div>
+                  <span
+                    class="material-icons"
+                    title="Adverts, unwanted frames, images, and objects"
+                  >
+                    info
+                  </span>
+                  <p>Ads</p>
+                </div>
                 <label class="switch switch-s">
-                  <input type="checkbox" checked>
+                  <input
+                    type="checkbox"
+                    data-key="ads"
+                    checked
+                  >
                   <span class="slider"></span>
                 </label>
               </li>
               <li class="ul-items">
-                <p>Trackers</p>
+                <div>
+                  <span
+                    class="material-icons"
+                    title="Web bugs, tracking scripts and information collectors"
+                  >
+                    info
+                  </span>
+                  <p>Trackers</p>
+                </div>
                 <label class="switch switch-s">
-                  <input type="checkbox" checked>
+                  <input
+                    type="checkbox"
+                    data-key="trackers"
+                    checked
+                  >
                   <span class="slider"></span>
                 </label>
               </li>
               <li class="ul-items">
-                <p>Annoyances</p>
+                <div>
+                  <span
+                    class="material-icons"
+                    title="Social Media content, in-page pop-ups and other annoyances"
+                  >
+                    info
+                  </span>
+                  <p>Annoyances</p>
+                </div>
                 <label class="switch switch-s">
-                  <input type="checkbox" checked>
+                  <input
+                    type="checkbox"
+                    data-key="annoyances"
+                    checked
+                  >
                   <span class="slider"></span>
                 </label>
               </li>
               <li class="ul-items">
-                <p>Redirects</p>
+                <div>
+                  <span class="material-icons" title="Badware, and scam redirects">
+                    info
+                  </span>
+                  <p>Redirects</p>
+                </div>
                 <label class="switch switch-s">
-                  <input type="checkbox" checked>
+                  <input
+                    type="checkbox"
+                    data-key="redirects"
+                    checked
+                  >
                   <span class="slider"></span>
                 </label>
               </li>
               <li class="ul-items">
-                <p>Your List</p>
+                <div>
+                  <span class="material-icons" title="Your custom blacklist">
+                    info
+                  </span>
+                  <p>Blacklist</p>
+                </div>
                 <label class="switch switch-s">
-                  <input type="checkbox" checked>
+                  <input
+                    type="checkbox"
+                    data-key="blaclist"
+                    checked
+                  >
                   <span class="slider"></span>
                 </label>
               </li>
