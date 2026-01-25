@@ -128,7 +128,7 @@ async function renderEditView(type, filter='') {
     // No results
     if (list.length === 0) {
         const p = document.createElement("p");
-        p.textContent = "Add your custom URL";
+        p.textContent = "No Results";
         p.className = "empty-state fade-text";
         editSection.appendChild(p);
         return;
