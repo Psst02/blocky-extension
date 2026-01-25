@@ -8,7 +8,7 @@
     <div class="popup-root">
       <main class="view-container">
         <div class="view-slider">
-          <section class="view" id="view-whitelist">
+          <section class="view" id="view-edit">
             <header>
               <h1>Whitelist</h1>
               <p>Add / Remove sites as exceptions</p>
@@ -38,75 +38,6 @@
                 </button>
               </div>
             </header>
-
-            <ul class="scrollable">
-              <li class="ul-items">
-                <p>Something.something</p>
-                <button
-                  id="remove-btn"
-                  class="icon-btn"
-                  aria-label="Remove URL"
-                  title="Remove URL"
-                >
-                  <span class="material-icons">remove_circle</span>
-                </button>
-              </li>
-              <li class="ul-items">
-                <p>Something.something</p>
-                <button
-                  id="remove-btn"
-                  class="icon-btn"
-                  aria-label="Remove URL"
-                  title="Remove URL"
-                >
-                  <span class="material-icons">remove_circle</span>
-                </button>
-              </li>
-              <li class="ul-items">
-                <p>Something.something</p>
-                <button
-                  id="remove-btn"
-                  class="icon-btn"
-                  aria-label="Remove URL"
-                  title="Remove URL"
-                >
-                  <span class="material-icons">remove_circle</span>
-                </button>
-              </li>
-              <li class="ul-items">
-                <p>Something.something</p>
-                <button
-                  id="remove-btn"
-                  class="icon-btn"
-                  aria-label="Remove URL"
-                  title="Remove URL"
-                >
-                  <span class="material-icons">remove_circle</span>
-                </button>
-              </li>
-              <li class="ul-items">
-                <p>Something.something</p>
-                <button
-                  id="remove-btn"
-                  class="icon-btn"
-                  aria-label="Remove URL"
-                  title="Remove URL"
-                >
-                  <span class="material-icons">remove_circle</span>
-                </button>
-              </li>
-              <li class="ul-items">
-                <p>Something.something</p>
-                <button
-                  id="remove-btn"
-                  class="icon-btn"
-                  aria-label="Remove URL"
-                  title="Remove URL"
-                >
-                  <span class="material-icons">remove_circle</span>
-                </button>
-              </li>
-            </ul>
           </section>
 
           <section class="view" id="view-home">
@@ -238,16 +169,33 @@
       </main>
 
       <footer>
-        <button
-          id="edit-btn"
-          class="icon-btn"
-          aria-label="Edit whitelist"
-          title="Edit Whitelist"
-        >
-          <span class="material-icons">
-            edit_document
-          </span>
-        </button>
+        <div class="menu">
+          <button
+            id="edit-btn"
+            class="icon-btn"
+            aria-label="Edit lists"
+            title="Edit Lists"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="my-menu"
+          >
+            <span class="material-icons">
+              edit_document
+            </span>
+          </button>
+
+          <div
+            id="my-menu"
+            class="menu-content"
+            role="menu"
+            aria-hidden="true"
+          >
+            <ul>
+              <li><button role="menuitem">Whitelist</button></li>
+              <li><button role="menuitem">Blacklist</button></li>
+            </ul>
+          </div>
+        </div>
 
         <button
           id="home-btn"
