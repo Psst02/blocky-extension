@@ -151,6 +151,10 @@ footer .icon-btn {
   border-bottom: 1px solid grey;
 }
 
+#add-btn {
+  color: darkgreen;
+}
+
 #remove-btn {
   color: darkred;
 }

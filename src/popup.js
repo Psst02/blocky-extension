@@ -64,11 +64,17 @@ document.getElementById("settings-btn").onclick = () => {
     slider.style.transform = "translateX(-200%)";
 };
 
+let currentEditType = "Whitelist";
+
 document.querySelectorAll('button[role="menuitem"]').forEach(btn => {
     btn.addEventListener("click", (e) => {
-        const option = e.target.textContent.trim();
+        // Validate type
+        currentEditType = e.target.textContent.trim();
+        const key = currentEditType.toLowerCase();
+        if (!["whitelist", "blacklist"].includes(key)) return;
+
         slider.style.transform = "translateX(0%)";
-        renderEditView(option);
+        renderEditView(currentEditType);
     });
 });
 
@@ -85,7 +91,7 @@ editBtn.addEventListener("click", (e) => {
     menu.setAttribute("aria-hidden", !isOpen);
 });
 
-document.addEventListener("click", (e) => {  // CLICK OUTSIDE
+document.addEventListener("click", (e) => {  // Click Outside
     if (!menu.contains(e.target) && !editBtn.contains(e.target)) {
         menu.classList.remove("show");
         editBtn.setAttribute("aria-expanded", "false");
@@ -94,47 +100,41 @@ document.addEventListener("click", (e) => {  // CLICK OUTSIDE
 });
 
 // RENDER WHITELIST / BLACKLIST ACCORDINGLY
-async function renderEditView(type) {
+async function renderEditView(type, filter='') {
     const editSection = document.getElementById("view-edit");
-    const titleEl = editSection.querySelector("header > h1");
-    const descEl = editSection.querySelector("header > p");
+    const title = editSection.querySelector("header > h1");
+    const description = editSection.querySelector("header > p");
 
-    // Clear old list/content
-    const oldList = editSection.querySelector("ul");
-    if (oldList) oldList.remove();
+    // Clear previous content
+    editSection.querySelectorAll("ul, .empty-state").forEach(e => e.remove());
 
-    const oldEmpty = editSection.querySelector(".empty-state");
-    if (oldEmpty) oldEmpty.remove();
+    title.textContent = type;
+    description.textContent =
+        type === "Whitelist"
+          ? "Add / Remove sites as exceptions"
+          : "Add / Remove blocked sites";
 
-    let storageKey;
-    let description;
+    const key = type.toLowerCase();
+    const result = await chrome.storage.local.get(key);
+    let list = result[key] || [];
 
-    switch (type) {
-        case "Whitelist":
-            storageKey = "whitelist";
-            description = "Add / Remove sites as exceptions";
-            break;
-        case "Blacklist":
-            storageKey = "blacklist";
-            description = "Add / Remove sites to always block";
-            break;
+    // Filter url if specified
+    if (filter) {
+        list = list.filter(url =>
+            url.toLowerCase().includes(filter.toLowerCase())
+        );
     }
-    titleEl.textContent = type;
-    descEl.textContent = description;
 
-    const result = await chrome.storage.local.get(storageKey);
-    const list = result[storageKey] || [];
-
-    // Empty state
+    // No results
     if (list.length === 0) {
         const p = document.createElement("p");
         p.textContent = "Add your custom URL";
-        p.className = "empty-state";
+        p.className = "empty-state fade-text";
         editSection.appendChild(p);
         return;
     }
 
-    // Build list
+    // Build list otherwise
     const ul = document.createElement("ul");
     list.forEach(url => {
         const li = document.createElement("li");
@@ -148,10 +148,41 @@ async function renderEditView(type) {
               aria-label="Remove ${url}"
               title="Remove URL"
             >
-            <span class="material-icons">remove_circle</span>
+              <span class="material-icons">remove_circle</span>
             </button>
         `;
         ul.appendChild(li);
     });
     editSection.appendChild(ul);
 }
+
+// LET USER ADD / SEARCH URL
+const urlInput = document.getElementById("url-input");
+
+urlInput.addEventListener("change", (e) => {
+    if (e.target.value.trim() === '') renderEditView(currentEditType);
+});
+
+document.getElementById("add-btn").onclick = async () => {
+    const value = urlInput.value.trim();
+    if (!value) return;
+
+    const key = currentEditType.toLowerCase();
+    const result = await chrome.storage.local.get(key);
+    const list = result[key] || [];
+
+    // Add only if no duplicate
+    if (!list.includes(value)) {
+        list.push(value);
+        await chrome.storage.local.set({ [key]: list });  // Ensure key isn't "key"
+    }
+    urlInput.value = '';
+    renderEditView(currentEditType);
+};
+
+document.getElementById("search-btn").onclick = () => {
+    const query = urlInput.value.trim();
+    renderEditView(currentEditType, query);
+};
+
+// LET USER REMOVE FROM LIST
