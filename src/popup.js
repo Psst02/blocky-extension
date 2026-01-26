@@ -143,8 +143,7 @@ async function renderEditView(type, filter='') {
         li.innerHTML = `
             <p>${url}</p>
             <button
-              id="remove-btn"
-              class="icon-btn"
+              class="icon-btn remove-btn"
               aria-label="Remove ${url}"
               title="Remove URL"
             >
@@ -186,3 +185,4 @@ document.getElementById("search-btn").onclick = () => {
 };
 
 // LET USER REMOVE FROM LIST
+document.getElementById

@@ -151,11 +151,18 @@ footer .icon-btn {
   border-bottom: 1px solid grey;
 }
 
+#view-edit .ul-items p {
+  text-align: start;
+  width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #add-btn {
   color: darkgreen;
 }
 
-#remove-btn {
+.remove-btn {
   color: darkred;
 }
 

@@ -13,11 +13,19 @@ const RULE_RANGES = {
 };
 const DYNAMIC_CAPACITY = 5000;
 
+// ASYNC GUARD, NO RACE CONDITION
+let dynamicRuleQueue = Promise.resolve();
+
+function queueDynamicUpdate(fn) {
+    dynamicRuleQueue = dynamicRuleQueue.then(fn);
+    return dynamicRuleQueue;
+}
+
 // INIT
 chrome.storage.local.get("preferences").then(({ preferences }) => {
     const prefs = Object.assign({}, DEFAULT_PREFS, preferences);
     applyPreferences(prefs);
-    syncDynamicList("whitelist");  // Always ON
+    queueDynamicUpdate(() => syncDynamicList("whitelist"));  // Always ON
 });
 
 // STORAGE LISTENER
@@ -30,13 +38,12 @@ chrome.storage.onChanged.addListener(async changes => {
 
     // User input URL
     if (changes.whitelist) {
-        await syncDynamicList("whitelist");
-        await syncDynamicList("blacklist");  // Get whitelist URL out
+        queueDynamicUpdate(() => syncDynamicList("whitelist"));
     }
     if (changes.blacklist) {
         const { preferences } = await chrome.storage.local.get("preferences");
         if (preferences?.master && preferences?.blacklist) {
-            await syncDynamicList("blacklist");
+            queueDynamicUpdate(() => syncDynamicList("blacklist"));
         }
     }
 });
@@ -49,7 +56,7 @@ async function applyPreferences(prefs) {
             enableRulesetIds: [],
             disableRulesetIds: ["ads", "trackers", "annoyances", "redirects"]
         });
-        await clearDynamicRules("blacklist");
+        queueDynamicUpdate(() => clearDynamicRules("blacklist"));
         return;
     }
 
@@ -67,8 +74,11 @@ async function applyPreferences(prefs) {
     });
 
     // Main switch ON (Dynamic rules)
-    if (prefs.blacklist) await syncDynamicList("blacklist");
-    else await clearDynamicRules("blacklist");
+    if (prefs.blacklist) {
+        queueDynamicUpdate(() => syncDynamicList("blacklist"));
+    } else {
+        queueDynamicUpdate(() => clearDynamicRules("blacklist"));
+    }
 }
 
 // GENERATE DYNAMIC RULES
