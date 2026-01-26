@@ -7,80 +7,106 @@ const DEFAULT_PREFS = {
     blacklist: true
 };
 
-chrome.storage.local.get(["preferences", "whitelist", "blacklist"])
-    .then(({ preferences, whitelist, blacklist }) => {
-        const prefs = Object.assign({}, DEFAULT_PREFS, preferences);
-        applyRules(prefs);
-        applyUserLists({ whitelist, blacklist }, prefs);
-    });
+const RULE_RANGES = {
+    whitelist: { start: 5001, priority: 2000, action: "allow" },
+    blacklist: { start: 1, priority: 1000, action: "block" }
+};
+const DYNAMIC_CAPACITY = 5000;
 
-chrome.storage.onChanged.addListener(changes => {
-    if (changes.preferences) {
-        const prefs = Object.assign(DEFAULT_PREFS, changes.preferences.newValue);
-        if (prefs.blacklist) applyUserLists({ whitelist });
-        applyRules(prefs);
-    }
-    else if (changes.whitelist || changes.blacklist) {}
+// INIT
+chrome.storage.local.get("preferences").then(({ preferences }) => {
+    const prefs = Object.assign({}, DEFAULT_PREFS, preferences);
+    applyPreferences(prefs);
+    syncDynamicList("whitelist");  // Always ON
 });
 
-function applyRules(prefs) {
+// STORAGE LISTENER
+chrome.storage.onChanged.addListener(async changes => {
+    // Toggle changes
+    if (changes.preferences) {
+        const prefs = Object.assign({}, DEFAULT_PREFS, changes.preferences.newValue);
+        applyPreferences(prefs);
+    }
+
+    // User input URL
+    if (changes.whitelist) {
+        await syncDynamicList("whitelist");
+        await syncDynamicList("blacklist");  // Get whitelist URL out
+    }
+    if (changes.blacklist) {
+        const { preferences } = await chrome.storage.local.get("preferences");
+        if (preferences?.master && preferences?.blacklist) {
+            await syncDynamicList("blacklist");
+        }
+    }
+});
+
+// CORE LOGIC (ENBALE / DISABLE RELEVANT RULESETS & DYNAMIC RULES)
+async function applyPreferences(prefs) {
+    // Main switch OFF
     if (!prefs.master) {
-        chrome.declarativeNetRequest.updateEnabledRulesets({
+        await chrome.declarativeNetRequest.updateEnabledRulesets({
             enableRulesetIds: [],
             disableRulesetIds: ["ads", "trackers", "annoyances", "redirects"]
         });
+        await clearDynamicRules("blacklist");
         return;
     }
 
+    // Main switch ON (Static rules)
     const enabled = [];
     const disabled = [];
 
     ["ads", "trackers", "annoyances", "redirects"].forEach(key => {
-        if (prefs[key]) enabled.push(key);
-        else disabled.push(key);
+        (prefs[key] ? enabled : disabled).push(key);
     });
 
-    chrome.declarativeNetRequest.updateEnabledRulesets({
+    await chrome.declarativeNetRequest.updateEnabledRulesets({
         enableRulesetIds: enabled,
         disableRulesetIds: disabled
     });
+
+    // Main switch ON (Dynamic rules)
+    if (prefs.blacklist) await syncDynamicList("blacklist");
+    else await clearDynamicRules("blacklist");
 }
 
-async function applyUserLists({ whitelist = [], blacklist = [] }, prefs) {
-    const existing = await chrome.declarativeNetRequest.getDynamicRules();
+// GENERATE DYNAMIC RULES
+async function syncDynamicList(type) {
+    const { whitelist = [], blacklist = [] } =
+        await chrome.storage.local.get(["whitelist", "blacklist"]);
 
-    // Define range
-    const oldIds = existing
-        .filter(r => r.id >= 1 && r.id < 5000)
-        .map(r => r.id);
+    // Filter URL overlaps if any
+    const list = type === "whitelist"
+        ? whitelist
+        : blacklist.filter(url => !whitelist.includes(url));
 
-    const rules = [];
+    const { start, priority, action } = RULE_RANGES[type];
 
-    // Whitelist (always allow, highest priority)
-    whitelist.forEach((url, i) => {
-        rules.push({
-            id: 1 + i,
-            priority: 2000,
-            action: { type: "allow" },
-            condition: { urlFilter: url }
-        });
-    });
+    const rules = list.map((url, i) => ({
+        id: start + i,
+        priority: priority,
+        action: { type: action },
+        condition: { urlFilter: url }
+    }));
 
-    // Blacklist (only if toggle is on)
-    if (prefs.blacklist) {
-        blacklist.forEach((url, i) => {
-            rules.push({
-                id: 2500 + i,
-                priority: 1000,
-                action: { type: "block" },
-                condition: { urlFilter: url }
-            });
-        });
-    }
-
+    // Overwrite (Clear & Add)
+    await clearDynamicRules(type);
     await chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds: oldIds,
         addRules: rules
     });
 }
 
+async function clearDynamicRules(type) {
+    const { start } = RULE_RANGES[type];
+    const existing = await chrome.declarativeNetRequest.getDynamicRules();
+    const idsToRemove = existing
+        .filter(r => r.id >= start && r.id < start + DYNAMIC_CAPACITY)
+        .map(r => r.id);
+
+    if (idsToRemove.length) {
+        await chrome.declarativeNetRequest.updateDynamicRules({
+            removeRuleIds: idsToRemove
+        });
+    }
+}
