@@ -1,40 +1,224 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
   <body>
-    <div class="body-container">
-      <header>
-        <h1>BLOCKY</h1>
-        <img
-          src="../icons/color48.png"
-          width="25px"
-          alt="Blocky Logo"
-        >
-      </header>
+    <div class="popup-root">
+      <main class="view-container">
+        <div class="view-slider">
+          <section class="view" id="view-edit">
+            <header>
+              <h1>Whitelist</h1>
+              <p>Add / Remove sites as exceptions</p>
+              <div class="input-container">
+                <input
+                  id="url-input"
+                  type="text"
+                  placeholder="Enter (substring) URL"
+                >
 
-      <label class="switch">
-        <input
-          type="checkbox"
-          aria-labelledby="status"
-          checked
-        >
-        <span class="slider"></span>
-      </label>
-      <p id="status">Ad blocking is <strong>ON</strong></p>
+                <button
+                  id="search-btn"
+                  class="icon-btn"
+                  aria-label="Search input URL"
+                  title="Search"
+                >
+                  <span class="material-icons">search</span>
+                </button>
 
-      <div class="stats-container">
-        <p class="fade-text">Blocked requests: 0</p>
+                <button
+                  id="add-btn"
+                  class="icon-btn"
+                  aria-label="Add input URL"
+                  title="Add URL"
+                >
+                  <span class="material-icons">add_circle</span>
+                </button>
+              </div>
+            </header>
+          </section>
+
+          <section class="view" id="view-home">
+            <header class="brand-title">
+              <h1>BLOCKY</h1>
+              <img src="../icons/color48.png" width="25" alt="Blocky Logo">
+            </header>
+
+            <label class="switch">
+              <input
+                type="checkbox"
+                data-key="master"
+                aria-labelledby="status"
+                checked
+              >
+              <span class="slider"></span>
+            </label>
+            <p id="status"></p>
+
+            <div class="stats-container">
+              <p class="fade-text">Blocked requests: 0</p>
+              <button
+                id="reset-btn"
+                class="icon-btn"
+                aria-label="Reset statistics"
+                title="Reset"
+              >
+                <span class="material-icons">restart_alt</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="view" id="view-settings">
+            <h1>Settings</h1>
+            <p>Preferences here</p>
+            <ul>
+              <li class="ul-items">
+                <div>
+                  <span
+                    class="material-icons"
+                    title="Adverts, unwanted frames, images, and objects"
+                  >
+                    info
+                  </span>
+                  <p>Ads</p>
+                </div>
+                <label class="switch switch-s">
+                  <input
+                    type="checkbox"
+                    data-key="ads"
+                    checked
+                  >
+                  <span class="slider"></span>
+                </label>
+              </li>
+              <li class="ul-items">
+                <div>
+                  <span
+                    class="material-icons"
+                    title="Web bugs, tracking scripts and information collectors"
+                  >
+                    info
+                  </span>
+                  <p>Trackers</p>
+                </div>
+                <label class="switch switch-s">
+                  <input
+                    type="checkbox"
+                    data-key="trackers"
+                    checked
+                  >
+                  <span class="slider"></span>
+                </label>
+              </li>
+              <li class="ul-items">
+                <div>
+                  <span
+                    class="material-icons"
+                    title="Social Media content, in-page pop-ups and other annoyances"
+                  >
+                    info
+                  </span>
+                  <p>Annoyances</p>
+                </div>
+                <label class="switch switch-s">
+                  <input
+                    type="checkbox"
+                    data-key="annoyances"
+                    checked
+                  >
+                  <span class="slider"></span>
+                </label>
+              </li>
+              <li class="ul-items">
+                <div>
+                  <span class="material-icons" title="Badware, and scam redirects">
+                    info
+                  </span>
+                  <p>Redirects</p>
+                </div>
+                <label class="switch switch-s">
+                  <input
+                    type="checkbox"
+                    data-key="redirects"
+                    checked
+                  >
+                  <span class="slider"></span>
+                </label>
+              </li>
+              <li class="ul-items">
+                <div>
+                  <span class="material-icons" title="Your custom blacklist">
+                    info
+                  </span>
+                  <p>Blacklist</p>
+                </div>
+                <label class="switch switch-s">
+                  <input
+                    type="checkbox"
+                    data-key="blacklist"
+                    checked
+                  >
+                  <span class="slider"></span>
+                </label>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </main>
+
+      <footer>
+        <div class="menu">
+          <button
+            id="edit-btn"
+            class="icon-btn"
+            aria-label="Edit lists"
+            title="Edit Lists"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="my-menu"
+          >
+            <span class="material-icons">
+              edit_document
+            </span>
+          </button>
+
+          <div
+            id="my-menu"
+            class="menu-content"
+            role="menu"
+            aria-hidden="true"
+          >
+            <ul>
+              <li><button role="menuitem">Whitelist</button></li>
+              <li><button role="menuitem">Blacklist</button></li>
+            </ul>
+          </div>
+        </div>
+
         <button
-          id="resetBtn"
+          id="home-btn"
           class="icon-btn"
-          aria-label="Reset statistics"
+          aria-label="Back to main screen"
+          title="Home"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15">
-            <path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2S334.3 224 344 224H463.5z"/>
-          </svg>
+          <span class="material-icons">
+            home
+          </span>
         </button>
-      </div>
+
+        <button
+          id="settings-btn"
+          class="icon-btn"
+          aria-label="Change settings"
+          title="Settings"
+        >
+          <span class="material-icons">
+            settings
+          </span>
+        </button>
+      </footer>
     </div>
     <script src="popup.js"></script>
   </body>
