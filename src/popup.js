@@ -100,8 +100,9 @@ document.addEventListener("click", (e) => {  // Click Outside
 });
 
 // RENDER WHITELIST / BLACKLIST ACCORDINGLY
+const editSection = document.getElementById("view-edit");
+
 async function renderEditView(type, filter='') {
-    const editSection = document.getElementById("view-edit");
     const title = editSection.querySelector("header > h1");
     const description = editSection.querySelector("header > p");
 
@@ -185,4 +186,18 @@ document.getElementById("search-btn").onclick = () => {
 };
 
 // LET USER REMOVE FROM LIST
-document.getElementById
+editSection.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".remove-btn");
+    if (!btn) return;
+
+    const url = btn.closest("li").querySelector("p").textContent;
+    const key = currentEditType.toLowerCase();
+
+    const result = await chrome.storage.local.get(key);
+    const list = result[key] || [];
+
+    const updatedList = list.filter(u => u !== url);
+    await chrome.storage.local.set({ [key]: updatedList });
+
+    renderEditView(currentEditType);
+});
