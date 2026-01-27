@@ -57,7 +57,7 @@ The script acts as a lightweight tooling layer around the rule pipeline, making 
 It can be run via:
 ```bash
 bash scripts/update-lists.sh
-// OR
+# OR
 npm run update-lists
 ```
 
