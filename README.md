@@ -44,6 +44,7 @@ Static blocking rules generated from external and community-maintained Adblock P
 - [EasyList](https://easylist.to/)
 - [uBlock Origin badware](https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt)
 - [Spam404](https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt)
+
 and converted into Chrome-compatible rules using the `abp2dnr` npm module.
 
 ### 4. Filter List Updates (`update-lists.sh`)
@@ -146,6 +147,7 @@ This project prioritizes:
 - correctness
 - stability
 - architectural clarity
+
 over live analytics.
 
 ### Dynamic Rule Ranges
