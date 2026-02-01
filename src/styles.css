@@ -81,7 +81,7 @@ input[type="checkbox"]:checked + .slider:before {
 }
 
 /* TEXT & ICONS STYLE */
-.fade-text {
+.is-muted {
   color: grey;
 }
 
@@ -143,7 +143,8 @@ footer .icon-btn {
 }
 
 /* USER INPUT URL LIST */
-.ul-items {
+#view-settings li,
+#view-edit li {
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -151,7 +152,7 @@ footer .icon-btn {
   border-bottom: 1px solid grey;
 }
 
-#view-edit .ul-items p {
+#view-edit li p {
   text-align: start;
   width: 170px;
   overflow: hidden;
@@ -185,17 +186,17 @@ footer .icon-btn {
 }
 
 /* USER PREFS TOGGLE LIST STYLE */
-#view-settings .ul-items {
+#view-settings li {
   padding: 8px 0;
 }
 
-#view-settings .ul-items div {
+#view-settings li div {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-#view-settings .ul-items div span {
+#view-settings li div span {
   color: darkblue;
   cursor: pointer;
 }
@@ -237,4 +238,13 @@ footer .icon-btn {
 
 .show {
   display: block;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
 }

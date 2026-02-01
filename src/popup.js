@@ -8,7 +8,7 @@ const DEFAULT_PREFS = {
 };
 
 // USER PREFS INIT
-const toggleSwitches = document.querySelectorAll('input[type="checkbox"]');
+const toggleSwitches = document.querySelectorAll('input[data-key]');
 const statusText = document.getElementById("status");
 
 async function loadPreferences() {
@@ -48,9 +48,7 @@ async function savePreference(key, value) {
 }
 
 function updateStatus(isEnabled) {
-    statusText.innerHTML = isEnabled
-      ? 'Blocking is <strong>ON</strong>'
-      : 'Blocking is <strong>OFF</strong>';
+    statusText.innerHTML = `Blocking is <strong>${isEnabled ? "ON" : "OFF"}</strong>`;
 }
 
 // PAGE SWIPE ANIMATION TRANSITION
@@ -103,8 +101,8 @@ document.addEventListener("click", (e) => {  // Click Outside
 const editSection = document.getElementById("view-edit");
 
 async function renderEditView(type, filter='') {
-    const title = editSection.querySelector("header > h1");
-    const description = editSection.querySelector("header > p");
+    const title = document.getElementById("edit-title");
+    const description = document.getElementById("edit-desc");
 
     // Clear previous content
     editSection.querySelectorAll("ul, .empty-state").forEach(e => e.remove());
@@ -130,7 +128,7 @@ async function renderEditView(type, filter='') {
     if (list.length === 0) {
         const p = document.createElement("p");
         p.textContent = "No Results";
-        p.className = "empty-state fade-text";
+        p.className = "empty-state is-muted";
         editSection.appendChild(p);
         return;
     }
@@ -139,8 +137,6 @@ async function renderEditView(type, filter='') {
     const ul = document.createElement("ul");
     list.forEach(url => {
         const li = document.createElement("li");
-        li.className = "ul-items";
-
         li.innerHTML = `
             <p>${url}</p>
             <button

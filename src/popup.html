@@ -1,18 +1,23 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
     <div class="popup-root">
       <main class="view-container">
         <div class="view-slider">
-          <section class="view" id="view-edit">
+          <section
+            class="view"
+            id="view-edit"
+            aria-labelledby="edit-title"
+            aria-describedby="edit-desc"
+          >
             <header>
-              <h1>Whitelist</h1>
-              <p>Add / Remove sites as exceptions</p>
+              <h1 id="edit-title">Whitelist</h1>
+              <p id="edit-desc">Add / Remove sites as exceptions</p>
               <div class="input-container">
+                <label for="url-input" class="sr-only">URL (substring)</label>
                 <input
                   id="url-input"
                   type="text"
@@ -25,7 +30,7 @@
                   aria-label="Search input URL"
                   title="Search"
                 >
-                  <span class="material-icons">search</span>
+                  <span class="material-icons" aria-hidden="true">search</span>
                 </button>
 
                 <button
@@ -34,13 +39,17 @@
                   aria-label="Add input URL"
                   title="Add URL"
                 >
-                  <span class="material-icons">add_circle</span>
+                  <span class="material-icons" aria-hidden="true">add_circle</span>
                 </button>
               </div>
             </header>
           </section>
 
-          <section class="view" id="view-home">
+          <section
+            class="view"
+            id="view-home"
+            aria-label="Home"
+          >
             <header class="brand-title">
               <h1>BLOCKY</h1>
               <img src="../icons/color48.png" width="25" alt="Blocky Logo">
@@ -55,97 +64,110 @@
               >
               <span class="slider"></span>
             </label>
-            <p id="status"></p>
+            <p id="status" aria-live="polite"></p>
           </section>
 
-          <section class="view" id="view-settings">
-            <h1>Settings</h1>
-            <p>Preferences here</p>
+          <section
+            class="view"
+            id="view-settings"
+            aria-labelledby="settings-title"
+            aria-describedby="settings-desc"
+          >
+            <h1 id="settings-title">Settings</h1>
+            <p id="settings-desc">Preferences here</p>
             <ul>
-              <li class="ul-items">
+              <li>
                 <div>
                   <span
                     class="material-icons"
                     title="Adverts, unwanted frames, images, and objects"
+                    aria-hidden="true"
                   >
                     info
                   </span>
-                  <p>Ads</p>
+                  <p id="label-ads">Ads</p>
                 </div>
                 <label class="switch switch-s">
                   <input
                     type="checkbox"
                     data-key="ads"
+                    aria-labelledby="label-ads"
                     checked
                   >
                   <span class="slider"></span>
                 </label>
               </li>
-              <li class="ul-items">
+              <li>
                 <div>
                   <span
                     class="material-icons"
                     title="Web bugs, tracking scripts and information collectors"
+                    aria-hidden="true"
                   >
                     info
                   </span>
-                  <p>Trackers</p>
+                  <p id="label-trackers">Trackers</p>
                 </div>
                 <label class="switch switch-s">
                   <input
                     type="checkbox"
                     data-key="trackers"
+                    aria-labelledby="label-trackers"
                     checked
                   >
                   <span class="slider"></span>
                 </label>
               </li>
-              <li class="ul-items">
+              <li>
                 <div>
                   <span
                     class="material-icons"
                     title="Social Media content, in-page pop-ups and other annoyances"
+                    aria-hidden="true"
                   >
                     info
                   </span>
-                  <p>Annoyances</p>
+                  <p id="label-annoy">Annoyances</p>
                 </div>
                 <label class="switch switch-s">
                   <input
                     type="checkbox"
                     data-key="annoyances"
+                    aria-labelledby="label-annoy"
                     checked
                   >
                   <span class="slider"></span>
                 </label>
               </li>
-              <li class="ul-items">
+              <li>
                 <div>
-                  <span class="material-icons" title="Badware, and scam redirects">
+                  <span class="material-icons" title="Badware, and scam redirects" aria-hidden="true">
                     info
                   </span>
-                  <p>Redirects</p>
+                  <p id="label-redirects">Redirects</p>
                 </div>
                 <label class="switch switch-s">
                   <input
                     type="checkbox"
                     data-key="redirects"
+                    aria-labelledby="label-redirects"
                     checked
                   >
                   <span class="slider"></span>
                 </label>
               </li>
-              <li class="ul-items">
+              <li>
                 <div>
-                  <span class="material-icons" title="Your custom blacklist">
+                  <span class="material-icons" title="Your custom blacklist" aria-hidden="true">
                     info
                   </span>
-                  <p>Blacklist</p>
+                  <p id="label-blacklist">Blacklist</p>
                 </div>
                 <label class="switch switch-s">
                   <input
                     type="checkbox"
                     data-key="blacklist"
+                    aria-labelledby="label-blacklist"
                     checked
                   >
                   <span class="slider"></span>
@@ -167,7 +189,7 @@
             aria-expanded="false"
             aria-controls="my-menu"
           >
-            <span class="material-icons">
+            <span class="material-icons" aria-hidden="true">
               edit_document
             </span>
           </button>
@@ -176,6 +198,7 @@
             id="my-menu"
             class="menu-content"
             role="menu"
+            aria-labelledby="edit-btn"
             aria-hidden="true"
           >
             <ul>
@@ -188,10 +211,10 @@
         <button
           id="home-btn"
           class="icon-btn"
-          aria-label="Back to main screen"
+          aria-label="Go to Home"
           title="Home"
         >
-          <span class="material-icons">
+          <span class="material-icons" aria-hidden="true">
             home
           </span>
         </button>
@@ -199,10 +222,10 @@
         <button
           id="settings-btn"
           class="icon-btn"
-          aria-label="Change settings"
+          aria-label="Go to Settings"
           title="Settings"
         >
-          <span class="material-icons">
+          <span class="material-icons" aria-hidden="true">
             settings
           </span>
         </button>
